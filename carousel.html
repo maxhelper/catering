@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/main/stylesheet.css" />
+    <script src="/assets/cms/cmsScript.js"></script>
+    <title>Carousel</title>
+  </head>
+  <body>
+    <div class="eventscarouselwrapper">
+      <div class="carousel-fade-left"></div>
+      <div class="swiper swiper-events">
+        <div class="swiper-wrapper events">
+          <div class="swiper-slide events">
+            <div class="swipereventscontent">
+              <div class="swipereventsquantitywrapper">
+                <p class="swipereventsquantitytext">Количество персон:&nbsp;</p>
+                <p class="swipereventsquantitytext" id="quantity">36</p>
+              </div>
+              <div class="swipereventsdivider"></div>
+              <div class="swipereventstext">
+                <h1 class="eventsuppertext" id="uppertext">Конференция</h1>
+                <h1 class="eventslowertext" id="lowertext">INTRA-TECH</h1>
+              </div>
+            </div>
+            <div class="swipereventsgradient"></div>
+            <div class="eventid-out" id="id-out">1</div>
+            <div class="events-slide-hover">
+              <div class="animated-text">
+                <span class="letter">С</span>
+                <span class="letter">м</span>
+                <span class="letter">о</span>
+                <span class="letter">т</span>
+                <span class="letter">р</span>
+                <span class="letter">е</span>
+                <span class="letter">т</span>
+                <span class="letter">ь</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-fade-right"></div>
+      <div class="eventscarouselbuttons">
+        <div class="events-button-prev">
+          <img src="assets/main/img/left-arrow.svg" alt="" />
+        </div>
+        <div class="events-button-next">
+          <img src="assets/main/img/right-arrow.svg" alt="" />
+        </div>
+      </div>
+      <div class="eventsmodalwindowswrapper">
+        <div class="storieswrapper">
+          <div class="swiper-wrapper stories">
+            <div class="swiper-slide story-slide">
+              <div class="inner-swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide inner-slide"></div>
+                </div>
+              </div>
+              <div class="eventid-in" id="id-in">1</div>
+              <div class="stories-overlay"></div>
+              <div class="swipereventscontentinner">
+                <div class="swipereventsquantitywrapper">
+                  <p class="swipereventsquantitytext">Количество персон:&nbsp;</p>
+                  <p class="swipereventsquantitytext" id="quantity">36</p>
+                </div>
+                <div class="swipereventsdivider"></div>
+                <div class="swipereventstext">
+                  <h1 class="eventsuppertext" id="uppertext">Конференция</h1>
+                  <h1 class="eventslowertext" id="lowertext">INTRA-TECH</h1>
+                </div>
+              </div>
+              <div class="swipereventsgradient"></div>
+            </div>
+          </div>
+        </div>
+        <div class="eventsmodalnavigation">
+          <div class="storynavigation">
+            <div class="pagination">
+              <div class="pagination-bullet">
+                <div class="progress-bar"></div>
+              </div>
+            </div>
+            <div class="closemodal">
+              <img src="assets/main/img/x.svg" alt="" />
+            </div>
+          </div>
+          <div class="inner-prev">
+            <img src="assets/main/img/left-arrow.svg" alt="" />
+          </div>
+          <div class="inner-next">
+            <img src="assets/main/img/right-arrow.svg" alt="" />
+          </div>
+        </div>
+        <div class="eventsmodalbackground"></div>
+      </div>
+    </div>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+      /* Main carousel initialize */
+      document.addEventListener("DOMContentLoaded", () => {
+        // Проверяем, что Swiper загружен
+        if (typeof Swiper !== 'undefined') {
+          initializeSwiper();
+        } else {
+          // Если Swiper еще не загружен, ждем его загрузки
+          const swiperScript = document.querySelector('script[src*="swiper"]');
+          swiperScript.addEventListener('load', initializeSwiper);
+        }
+
+        function initializeSwiper() {
+          const swiperEvents = new Swiper(".swiper.swiper-events", {
+            loop: false,
+            slidesOffsetBefore: 60,
+            slidesOffsetAfter: 60,
+            slidesPerView: "auto",
+            navigation: {
+              nextEl: ".events-button-next",
+              prevEl: ".events-button-prev",
+            },
+            breakpoints: {
+              0: {
+                slidesOffsetBefore: 10,
+                slidesOffsetAfter: 10,
+              },
+              1279: {
+                slidesOffsetBefore: 60,
+                slidesOffsetAfter: 60,
+              }
+            },
+          });
+        }
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("cardsReady", () => {
+          setTimeout(() => {
+            const SLIDE_DURATION = 5000;
+
+            // Находим слайды событий
+            const eventSlides = Array.from(
+              document.querySelectorAll(".swiper-slide.events")
+            );
+
+            // Находим модальное окно и его компоненты
+            const modal = document.querySelector(".eventsmodalwindowswrapper");
+            const storiesWrapper = modal.querySelector(
+              ".storieswrapper .swiper-wrapper.stories"
+            );
+            const storySlides = Array.from(
+              storiesWrapper.querySelectorAll(".swiper-slide.story-slide")
+            );
+
+            // Находим кнопки навигации
+            const btnPrev = modal.querySelector(".inner-prev");
+            const btnNext = modal.querySelector(".inner-next");
+            const paginationWrapper = modal.querySelector(".pagination");
+            const btnClose = modal.querySelector(".closemodal");
+            const navWrapper = modal.querySelector(".eventsmodalnavigation");
+
+            // Убедимся что модальное окно изначально скрыто
+            modal.style.display = "none";
+
+            let currentStoryIndex = 0;
+            let currentInnerIndex = 0;
+            let autoProgressTimeout;
+
+            Object.assign(navWrapper.style, {
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%)",
+              transition: "opacity 0.5s ease",
+              opacity: "1"
+            });
+
+            function resetStyles() {
+              clearTimeout(autoProgressTimeout);
+              storiesWrapper.style.transition = "none";
+              storiesWrapper.style.transform = "translateX(0)";
+              storySlides.forEach((s) => {
+                s.style.width = "";
+                const inner = s.querySelector(".inner-swiper .swiper-wrapper");
+                if (inner) {
+                  inner.style.transition = "none";
+                  inner.style.transform = "translateX(0)";
+                }
+              });
+            }
+
+            function openStory(idx) {
+              currentStoryIndex = idx;
+              currentInnerIndex = 0;
+              resetStyles();
+              
+              // Move modal to parent document
+              const parentBody = window.parent.document.body;
+              if (!parentBody.contains(modal)) {
+                // Copy all necessary styles to parent document
+                const styles = Array.from(document.styleSheets).map(sheet => {
+                  try {
+                    return Array.from(sheet.cssRules)
+                      .map(rule => rule.cssText)
+                      .join('\n');
+                  } catch (e) {
+                    // Пропускаем внешние таблицы стилей из-за CORS
+                    return '';
+                  }
+                }).join('\n');
+
+                const styleElement = window.parent.document.createElement('style');
+                styleElement.setAttribute('data-from-iframe', 'true');
+                styleElement.textContent = styles;
+                window.parent.document.head.appendChild(styleElement);
+
+                // Копируем необходимые ссылки на шрифты и стили
+                const fontLinks = document.querySelectorAll('link[rel="preconnect"], link[href*="fonts.googleapis"]');
+                fontLinks.forEach(link => {
+                  if (!window.parent.document.querySelector(`link[href="${link.href}"]`)) {
+                    const newLink = window.parent.document.createElement('link');
+                    Array.from(link.attributes).forEach(attr => {
+                      newLink.setAttribute(attr.name, attr.value);
+                    });
+                    window.parent.document.head.appendChild(newLink);
+                  }
+                });
+
+                // Добавляем модальное окно в родительский документ
+                parentBody.appendChild(modal);
+
+                // Ensure modal is positioned correctly in parent window
+                Object.assign(modal.style, {
+                  position: 'fixed',
+                  top: '0',
+                  left: '0',
+                  width: '100%',
+                  height: '100%',
+                  zIndex: '9999'
+                });
+
+                // Добавляем Swiper стили если они нужны
+                if (!window.parent.document.querySelector('link[href*="swiper"]')) {
+                  const swiperStyle = document.querySelector('link[href*="swiper"]');
+                  if (swiperStyle) {
+                    const newSwiperStyle = swiperStyle.cloneNode(true);
+                    window.parent.document.head.appendChild(newSwiperStyle);
+                  }
+                }
+              }
+              
+              modal.style.display = "flex";
+              navWrapper.style.opacity = "1";
+              updateSlidesStyle();
+              requestAnimationFrame(() => requestAnimationFrame(centerStory));
+            }
+
+            // Обработчик для прямых кликов по слайдам событий
+            eventSlides.forEach((slide, idx) => {
+              slide.addEventListener("click", (e) => {
+                console.log("🎯 Клик по слайду:", idx);
+                console.log("Элемент, по которому кликнули:", e.target);
+
+                // Проверяем, был ли клик по eventid-out
+                const eventIdOutElement = e.target.closest(
+                  "[eventid-out], .eventid-out"
+                );
+                console.log("Найден элемент с eventid-out:", eventIdOutElement);
+
+                if (
+                  eventIdOutElement &&
+                  !eventIdOutElement.classList.contains("w-dyn-bind-empty")
+                ) {
+                  console.log(
+                    "eventid-out элемент валиден (нет класса w-dyn-bind-empty)"
+                  );
+
+                  const eventId =
+                    eventIdOutElement.getAttribute("eventid-out") ||
+                    eventIdOutElement.dataset.eventidOut;
+                  console.log("Полученный eventId:", eventId);
+
+                  if (eventId) {
+                    console.log(
+                      "Ищем соответствующую историю для eventId:",
+                      eventId
+                    );
+                    // Ищем соответствующую историю с eventid-in
+                    const matchIndex = storySlides.findIndex((story) => {
+                      const inId =
+                        story.getAttribute("eventid-in") ||
+                        story.dataset.eventidIn;
+                      console.log("Проверяем story с eventid-in:", inId);
+                      const match =
+                        inId === eventId &&
+                        !story
+                          .querySelector(".eventid-in")
+                          .classList.contains("w-dyn-bind-empty");
+                      if (match) {
+                        console.log("Нашли соответствие!");
+                      }
+                      return match;
+                    });
+                    console.log("Результат поиска matchIndex:", matchIndex);
+
+                    if (matchIndex !== -1) {
+                      console.log(
+                        "Открываем историю по найденному индексу:",
+                        matchIndex
+                      );
+                      e.preventDefault();
+                      e.stopPropagation();
+                      openStory(matchIndex);
+                      return;
+                    }
+                  }
+                }
+                // Если не нашли eventid-out или не нашли соответствующий eventid-in, открываем историю по индексу слайда
+                console.log("Открываем историю по индексу слайда:", idx);
+                openStory(idx);
+              });
+            });
+
+            function updateSlidesStyle() {
+              storySlides.forEach((s, idx) => {
+                const overlay = s.querySelector(".stories-overlay");
+                if (overlay) {
+                  Object.assign(overlay.style, {
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    width: "100%",
+                    height: "100%",
+                    pointerEvents: "none",
+                    transition: "opacity 0.5s ease",
+                    display: idx === currentStoryIndex ? "none" : "block",
+                    opacity: idx === currentStoryIndex ? "0" : "1",
+                  });
+                }
+                // Добавляем cursor: pointer для неактивных историй
+                s.style.cursor = idx === currentStoryIndex ? "" : "pointer";
+                // Сохраняем естественную ширину слайдов для корректного центрирования
+                s.style.transition = "";
+                s.style.width = "";
+              });
+            }
+
+            function centerStory() {
+              const containerWidth = storiesWrapper.parentElement.clientWidth;
+              const active = storySlides[currentStoryIndex];
+              const shift =
+                containerWidth / 2 -
+                (active.offsetLeft + active.offsetWidth / 2);
+
+              storiesWrapper.style.transition = "transform 0.5s ease";
+              storiesWrapper.style.transform = `translateX(${shift}px)`;
+
+              updateInnerSlide();
+            }
+
+            function updateInnerSlide() {
+              clearTimeout(autoProgressTimeout);
+              const story = storySlides[currentStoryIndex];
+              const innerWrapper = story.querySelector(
+                ".inner-swiper .swiper-wrapper"
+              );
+              const innerSlides = Array.from(
+                innerWrapper.querySelectorAll(".inner-slide")
+              );
+              if (currentInnerIndex >= innerSlides.length)
+                currentInnerIndex = 0;
+
+              storySlides.forEach((storySlide, idx) => {
+                const wrapper = storySlide.querySelector(
+                  ".inner-swiper .swiper-wrapper"
+                );
+                if (wrapper && idx !== currentStoryIndex) {
+                  wrapper.style.transition = "none";
+                  wrapper.style.transform = "translateX(0)";
+                }
+              });
+
+              const w = innerSlides[0]?.offsetWidth || 0;
+              innerWrapper.style.transition = "none";
+              innerWrapper.style.transform = `translateX(-${
+                currentInnerIndex * w
+              }px)`;
+              innerWrapper.offsetHeight;
+              innerWrapper.style.transition = "transform 0.5s ease";
+
+              btnPrev.classList.toggle(
+                "swiper-button-disabled",
+                currentStoryIndex === 0 && currentInnerIndex === 0
+              );
+              btnNext.classList.toggle(
+                "swiper-button-disabled",
+                currentStoryIndex === storySlides.length - 1 &&
+                  currentInnerIndex === innerSlides.length - 1
+              );
+
+              paginationWrapper.innerHTML = "";
+              innerSlides.forEach((_, i) => {
+                const bullet = document.createElement("div");
+                bullet.className = "pagination-bullet";
+                bullet.style.borderRadius = "4px";
+                const prog = document.createElement("div");
+                prog.className = "progress-bar";
+                prog.style.borderRadius = "4px";
+                prog.style.width = i < currentInnerIndex ? "100%" : "0%";
+                prog.style.transition = "none";
+                bullet.appendChild(prog);
+                bullet.addEventListener("click", () => {
+                  clearTimeout(autoProgressTimeout);
+                  currentInnerIndex = i;
+                  updateInnerSlide();
+                });
+                paginationWrapper.appendChild(bullet);
+              });
+
+              progressRemaining = SLIDE_DURATION;
+              progressStartTime = Date.now();
+              isPaused = false;
+
+              const activeProg =
+                paginationWrapper.children[currentInnerIndex]?.querySelector(
+                  ".progress-bar"
+                );
+              if (activeProg) {
+                activeProg.style.transition = "none";
+                activeProg.style.width = "0%";
+                activeProg.offsetWidth;
+                activeProg.style.transition = `width ${SLIDE_DURATION}ms linear`;
+                activeProg.style.width = "100%";
+              }
+
+              autoProgressTimeout = setTimeout(goNext, SLIDE_DURATION);
+            }
+
+            let startX = 0;
+
+            // Обработчики для storiesWrapper
+            storiesWrapper.addEventListener("click", (e) => {
+              const clickedSlide = e.target.closest(
+                ".swiper-slide.story-slide"
+              );
+              if (
+                clickedSlide &&
+                !clickedSlide.contains(storySlides[currentStoryIndex])
+              ) {
+                const newIndex = storySlides.indexOf(clickedSlide);
+                if (newIndex !== -1) {
+                  currentStoryIndex = newIndex;
+                  currentInnerIndex = 0;
+                  updateSlidesStyle();
+                  centerStory();
+                }
+              }
+            });
+
+            let isActiveStoryInteraction = false;
+            let isPointerDown = false;
+
+            storiesWrapper.addEventListener("pointerdown", (e) => {
+              const activeStory = storySlides[currentStoryIndex];
+              const isClickOnActive = activeStory.contains(e.target);
+
+              if (isClickOnActive) {
+                isActiveStoryInteraction = true;
+                isPointerDown = true;
+                startX = e.clientX;
+                document.addEventListener("pointermove", handlePointerMove);
+              }
+            });
+
+            function handlePointerMove(e) {
+              if (!isPointerDown) return;
+            }
+
+            function handleGlobalPointerUp(e) {
+              if (!isPointerDown) return;
+
+              document.removeEventListener("pointermove", handlePointerMove);
+
+              const diff = e.clientX - startX;
+              const activeStory = storySlides[currentStoryIndex];
+
+              if (isActiveStoryInteraction) {
+                if (Math.abs(diff) > 40) {
+                  diff < 0 ? goNext() : goPrev();
+                } else if (activeStory.contains(e.target)) {
+                  openActiveLink();
+                }
+              }
+
+              isPointerDown = false;
+              isActiveStoryInteraction = false;
+            }
+
+            function handlePointerCancel() {
+              if (isPointerDown) {
+                isPointerDown = false;
+                isActiveStoryInteraction = false;
+              }
+            }
+
+            // Слушаем глобально
+            document.addEventListener("pointerup", handleGlobalPointerUp);
+            document.addEventListener("pointercancel", handlePointerCancel);
+
+            function openActiveLink() {
+              const slide = storySlides[currentStoryIndex];
+              const url = slide.dataset.url || slide.querySelector("a")?.href;
+              if (url) window.location.href = url;
+            }
+
+            function goNext() {
+              const innerCount =
+                storySlides[currentStoryIndex].querySelectorAll(
+                  ".inner-slide"
+                ).length;
+              if (currentInnerIndex < innerCount - 1) {
+                currentInnerIndex++;
+                updateInnerSlide();
+              } else if (currentStoryIndex < storySlides.length - 1) {
+                currentStoryIndex++;
+                currentInnerIndex = 0;
+                navWrapper.style.opacity = "0";
+                updateSlidesStyle();
+                requestAnimationFrame(() => {
+                  centerStory();
+                  navWrapper.style.opacity = "1";
+                });
+              }
+            }
+            function goPrev() {
+              if (currentInnerIndex > 0) {
+                currentInnerIndex--;
+                updateInnerSlide();
+              } else if (currentStoryIndex > 0) {
+                currentStoryIndex--;
+                const prevCount =
+                  storySlides[currentStoryIndex].querySelectorAll(
+                    ".inner-slide"
+                  ).length;
+                currentInnerIndex = prevCount - 1;
+                navWrapper.style.opacity = "0";
+                updateSlidesStyle();
+                requestAnimationFrame(() => {
+                  centerStory();
+                  navWrapper.style.opacity = "1";
+                });
+              }
+            }
+
+            btnNext.addEventListener("click", () => {
+              clearTimeout(autoProgressTimeout);
+              goNext();
+            });
+
+            btnPrev.addEventListener("click", () => {
+              clearTimeout(autoProgressTimeout);
+              goPrev();
+            });
+
+            btnClose.addEventListener("click", () => {
+              clearTimeout(autoProgressTimeout);
+              modal.style.display = "none";
+              // Return modal back to iframe when closed
+              if (window.parent.document.body.contains(modal)) {
+                document.querySelector('.eventsmodalwindowswrapper').appendChild(modal);
+                
+                // Удаляем добавленные стили и ссылки из родительского документа
+                window.parent.document.querySelectorAll('style[data-from-iframe]').forEach(style => {
+                  style.remove();
+                });
+              }
+            });
+          }, 100); // Задержка 100мс для обновления DOM
+        }); // cardsReady
+      }); // DOMContentLoaded
+    </script>
+
+    <script type="module">
+      let hasShownHover = false; // Флаг для отслеживания, показывали ли мы уже hover
+
+      function initMobileHover() {
+        const isMobile = window.innerWidth <= 767;
+        if (!isMobile) return;
+
+        const firstSlideHover = document.querySelector('.swiper-slide.events:first-child .events-slide-hover');
+        if (!firstSlideHover || hasShownHover) return;
+
+        // Сначала установим CSS свойства
+        firstSlideHover.style.transition = 'opacity 0.5s ease';
+        firstSlideHover.style.opacity = '1';
+        
+        // Сразу устанавливаем начальные стили для букв
+        const letters = firstSlideHover.querySelectorAll('.letter');
+        letters.forEach(letter => {
+            letter.style.opacity = '0';
+            letter.style.transform = 'translateY(20px)';
+            letter.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        });
+        
+        console.log('Hover element and letters initialized');
+
+        function showAndHideHover() {
+          if (hasShownHover) return;
+          
+          hasShownHover = true;
+          console.log('Starting animations and timer');
+          
+          // Добавляем класс для запуска анимации
+          const letters = firstSlideHover.querySelectorAll('.letter');
+          letters.forEach((letter, index) => {
+            // Задержка для каждой буквы
+            setTimeout(() => {
+              letter.style.opacity = '1';
+              letter.style.transform = 'translateY(0)';
+            }, index * 50); // 50ms задержка между буквами
+          });
+
+          // Через 2 секунды скрываем весь элемент
+          setTimeout(() => {
+            firstSlideHover.style.opacity = '0';
+            console.log('Hiding hover element');
+            
+            // Сбрасываем стили букв после исчезновения
+            setTimeout(() => {
+              letters.forEach(letter => {
+                letter.style.opacity = '';
+                letter.style.transform = '';
+              });
+            }, 500); // После завершения анимации исчезновения
+          }, 2000);
+        }
+
+        // Создаем новый observer для каждой инициализации
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasShownHover) {
+              console.log('Carousel is now visible');
+              
+              // Устанавливаем начальные стили для букв
+              const letters = firstSlideHover.querySelectorAll('.letter');
+              letters.forEach(letter => {
+                letter.style.opacity = '0';
+                letter.style.transform = 'translateY(20px)';
+                letter.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+              });
+
+              // Запускаем анимацию
+              requestAnimationFrame(() => {
+                showAndHideHover();
+              });
+              
+              observer.disconnect();
+            }
+          });
+        }, {
+          threshold: 0.3 // Увеличиваем порог видимости
+        });
+
+        // Наблюдаем за каруселью
+        const carousel = document.querySelector('.swiper.swiper-events');
+        if (carousel) {
+          observer.observe(carousel);
+          console.log('Started observing carousel');
+
+          // Скрываем при любом взаимодействии
+          carousel.addEventListener('pointerdown', () => {
+            if (!hasShownHover) {
+              hasShownHover = true;
+              firstSlideHover.style.opacity = '0';
+              console.log('Hiding hover due to interaction');
+            }
+          }, { once: true });
+        }
+      }
+
+      // Инициализируем при загрузке DOM
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log('DOM Content Loaded');
+        initMobileHover();
+      });
+
+      // Также пробуем инициализировать после полной загрузки страницы
+      window.addEventListener("load", () => {
+        console.log('Window Loaded');
+        initMobileHover();
+      });
+
+      // И после события cardsReady
+      document.addEventListener("cardsReady", () => {
+        console.log('Cards Ready');
+        initMobileHover();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Debug files (удалить перед деплоем!)
+admin/phpinfo.php
+admin/debug.php
+admin/test-debug.php
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Dependencies (если будут добавлены)
+vendor/
+node_modules/
+
+# Uploads (опционально - раскомментировать если не нужны в репо)
+# admin/uploads/*.jpg
+# admin/uploads/*.jpeg
+# admin/uploads/*.png
+# admin/uploads/*.gif

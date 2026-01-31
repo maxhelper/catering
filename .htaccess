@@ -1,0 +1,27 @@
+# Включаем mod_rewrite
+RewriteEngine On
+
+# 🔁 Перенаправление с www на без www
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# 🌐 Автоматическая подстановка .html
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# 🌐 Автоматическая подстановка .php
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# 📂 Разрешаем index.html и index.php как главные файлы в директориях
+DirectoryIndex index.html index.php
+
+# 🌐 Разрешаем CORS для всех запросов
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# 🛠 Пример: путь /test-check → /check.html
+RewriteRule ^test-check$ /check.html [L]

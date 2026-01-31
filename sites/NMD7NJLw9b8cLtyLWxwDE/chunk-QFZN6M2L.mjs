@@ -1,0 +1,2 @@
+import{da as o,m as e,v as r}from"./chunk-7XVRUMAQ.mjs";function n(){return e(()=>{if(!document.querySelector('script[src="https://catering-marketplace.me/framer-cms.js"]')){let t=document.createElement("script");t.src="https://catering-marketplace.me/framer-cms.js",t.async=!0,document.body.appendChild(t)}},[]),r("div",{style:{width:1,height:1}})}o(n,{});export{n as a};
+//# sourceMappingURL=chunk-QFZN6M2L.mjs.map
